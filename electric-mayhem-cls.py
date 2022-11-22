@@ -3,7 +3,6 @@
 
 import json
 from scipy import stats
-from Crypto.Cipher import AES
 import matplotlib.pyplot as plt
 
 f = open('traces.json', 'r')
@@ -71,25 +70,16 @@ def calculateCorrelation(b_idx, b_key):
     final_correlations.append(max(intermediate_correlations))
 
 
-# for byte_index in range(16):
-#     for key_byte in range(256):
-#         calculateCorrelation(byte_index, key_byte)
-#     maximum = max(final_correlations)
-#     for idx, value in enumerate(final_correlations):
-#         if value == maximum:
-#             print("Byte index: {} - Key byte value: 0x{:02X} - Correlation coefficient: {:.5f}".format(byte_index, idx,
-#                                                                                                        value))
-#     final_correlations.clear()
+for byte_index in range(16):
+    for key_byte in range(256):
+        calculateCorrelation(byte_index, key_byte)
+    maximum = max(final_correlations)
+    for idx, value in enumerate(final_correlations):
+        if value == maximum:
+            print("Byte index: {} - Key byte value: 0x{:02X} - Correlation coefficient: {:.5f}".format(byte_index, idx,
+                                                                                                       value))
+    final_correlations.clear()
 
-# key_h = "5730636B41776F634B61576F436B6131"
-# key = bytes([0x57, 0x30, 0x63, 0x6B, 0x41, 0x77, 0x6F, 0x63, 0x4B, 0x61, 0x57, 0x6F, 0x43, 0x6B, 0x61, 0x31])
-ciphertext_h = "111f144c62f296fcdade00be0f3e3cbb"
-# ciphertext = bytes.fromhex(ciphertext_h)
-# cipher = AES.new(key, AES.MODE_ECB)
-# msg = cipher.decrypt(ciphertext)
-# print(msg)
-
-# print(key_a)
 # Visualize the result
 # x = [range(256)]
 # y = [0.5144798137622282, 0.5279636346091328, 0.45744292509604684, 0.5872421653580967, 0.44084589269098495,
